@@ -19,12 +19,19 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  exercises: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      exercise: {
+        type: Schema.Types.ObjectId,
+        ref: 'Exercise',
+      },
+      completed: {
+        type: Boolean,
+        default: false,
+      },
     },
-  ],
+  ]
+  
 });
 
 userSchema.pre('save', async function (next) {
