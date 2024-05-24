@@ -1,0 +1,245 @@
+[
+    {
+        "name": "Push-Up",
+        "description": "A basic upper body exercise targeting multiple muscles.",
+        "bodyPart": [
+            "Upper Body",
+            "Chest",
+            "Shoulders",
+            "Triceps"
+        ],
+        "equipment": "None",
+        "difficulty": "Easy",
+        "instructions": "1. Start in a plank position with your arms straight.\n2. Lower your body until your chest nearly touches the floor.\n3. Push yourself back up to the starting position."
+    },
+    {
+        "name": "Bench Press",
+        "description": "A primary upper body exercise for strength.",
+        "bodyPart": [
+            "Upper Body",
+            "Chest",
+            "Shoulders",
+            "Triceps"
+        ],
+        "equipment": "Barbell",
+        "difficulty": "Medium",
+        "instructions": "1. Lie on a flat bench and grasp the barbell with a grip slightly wider than shoulder-width.\n2. Lower the barbell to your chest, keeping your elbows at a 45-degree angle.\n3. Push the barbell back up to the starting position."
+    },
+    {
+        "name": "Bicep Curl",
+        "description": "An isolation exercise for the biceps.",
+        "bodyPart": [
+            "Upper Body",
+            "Arms",
+            "Biceps"
+        ],
+        "equipment": "Dumbbells",
+        "difficulty": "Easy",
+        "instructions": "1. Stand with your feet shoulder-width apart, holding a dumbbell in each hand.\n2. Keep your elbows close to your torso and curl the weights while contracting your biceps.\n3. Continue to raise the weights until your biceps are fully contracted and the dumbbells are at shoulder level.\n4. Slowly lower the dumbbells back to the starting position."
+    },
+    {
+        "name": "Shoulder Press",
+        "description": "An exercise to strengthen the shoulders and upper arms.",
+        "bodyPart": [
+            "Upper Body",
+            "Shoulders",
+            "Triceps"
+        ],
+        "equipment": "Dumbbells",
+        "difficulty": "Medium",
+        "instructions": "1. Stand with your feet shoulder-width apart, holding a dumbbell in each hand at shoulder height.\n2. Press the weights upward until your arms are fully extended.\n3. Lower the weights back to shoulder height."
+    },
+    {
+        "name": "Pull-Up",
+        "description": "An upper body exercise focusing on the back and biceps.",
+        "bodyPart": [
+            "Upper Body",
+            "Back",
+            "Biceps"
+        ],
+        "equipment": "Pull-Up Bar",
+        "difficulty": "Hard",
+        "instructions": "1. Grab the pull-up bar with a grip that is slightly wider than shoulder-width.\n2. Hang with your arms fully extended.\n3. Pull yourself up until your chin is above the bar.\n4. Lower yourself back to the starting position."
+    },
+    {
+        "name": "Tricep Dips",
+        "description": "An exercise to target the triceps and chest.",
+        "bodyPart": [
+            "Upper Body",
+            "Triceps",
+            "Chest"
+        ],
+        "equipment": "Parallel Bars",
+        "difficulty": "Medium",
+        "instructions": "1. Grip the parallel bars and lift your body up.\n2. Lower your body by bending your elbows until your shoulders are below your elbows.\n3. Push yourself back up to the starting position."
+    },
+    {
+        "name": "Bent Over Row",
+        "description": "An exercise to strengthen the back and biceps.",
+        "bodyPart": [
+            "Upper Body",
+            "Back",
+            "Biceps"
+        ],
+        "equipment": "Barbell",
+        "difficulty": "Medium",
+        "instructions": "1. Bend at the waist while keeping your back straight, holding a barbell with both hands.\n2. Pull the barbell towards your lower ribcage.\n3. Lower the barbell back to the starting position."
+    },
+    {
+        "name": "Chest Fly",
+        "description": "An exercise to isolate the chest muscles.",
+        "bodyPart": [
+            "Upper Body",
+            "Chest"
+        ],
+        "equipment": "Dumbbells",
+        "difficulty": "Easy",
+        "instructions": "1. Lie on a flat bench, holding a dumbbell in each hand above your chest with your palms facing each other.\n2. Lower the dumbbells out to the sides, keeping a slight bend in your elbows.\n3. Bring the dumbbells back together above your chest."
+    },
+    {
+        "name": "Lat Pulldown",
+        "description": "An exercise targeting the back muscles.",
+        "bodyPart": [
+            "Upper Body",
+            "Back"
+        ],
+        "equipment": "Lat Pulldown Machine",
+        "difficulty": "Medium",
+        "instructions": "1. Sit at the lat pulldown machine and grasp the bar with a wide grip.\n2. Pull the bar down towards your chest, squeezing your shoulder blades together.\n3. Slowly return the bar to the starting position."
+    },
+    {
+        "name": "Arnold Press",
+        "description": "A shoulder exercise to build strength and size.",
+        "bodyPart": [
+            "Upper Body",
+            "Shoulders"
+        ],
+        "equipment": "Dumbbells",
+        "difficulty": "Medium",
+        "instructions": "1. Sit on a bench with back support, holding a dumbbell in each hand at shoulder height with your palms facing your body.\n2. Rotate your palms away from your body as you press the weights overhead.\n3. Reverse the motion to return to the starting position."
+    },
+    {
+        "name": "Squat",
+        "description": "A fundamental lower body exercise.",
+        "bodyPart": [
+            "Lower Body",
+            "Quads",
+            "Hamstrings",
+            "Glutes"
+        ],
+        "equipment": "None",
+        "difficulty": "Medium",
+        "instructions": "1. Stand with your feet shoulder-width apart.\n2. Lower your hips back and down while bending your knees.\n3. Keep your chest up and your back straight.\n4. Return to the starting position."
+    },
+    {
+        "name": "Lunges",
+        "description": "A lower body exercise focusing on the legs and glutes.",
+        "bodyPart": [
+            "Lower Body",
+            "Quads",
+            "Hamstrings",
+            "Glutes"
+        ],
+        "equipment": "None",
+        "difficulty": "Easy",
+        "instructions": "1. Stand with your feet together.\n2. Step forward with one leg and lower your hips until both knees are bent at about a 90-degree angle.\n3. Return to the starting position and repeat with the other leg."
+    },
+    {
+        "name": "Deadlift",
+        "description": "A full-body exercise targeting the posterior chain.",
+        "bodyPart": [
+            "Lower Body",
+            "Back",
+            "Hamstrings",
+            "Glutes"
+        ],
+        "equipment": "Barbell",
+        "difficulty": "Hard",
+        "instructions": "1. Stand with your mid-foot under the barbell.\n2. Bend at the hips and knees to grab the bar with a shoulder-width grip.\n3. Lift the bar by straightening your back and knees to stand up.\n4. Lower the bar back to the ground while keeping your back straight."
+    },
+    {
+        "name": "Leg Press",
+        "description": "An exercise to target the quadriceps, hamstrings, and glutes.",
+        "bodyPart": [
+            "Lower Body",
+            "Quads",
+            "Hamstrings",
+            "Glutes"
+        ],
+        "equipment": "Leg Press Machine",
+        "difficulty": "Medium",
+        "instructions": "1. Sit on the leg press machine and place your feet shoulder-width apart on the platform.\n2. Lower the platform by bending your knees until they form a 90-degree angle.\n3. Push the platform back up to the starting position."
+    },
+    {
+        "name": "Calf Raises",
+        "description": "An isolation exercise for the calf muscles.",
+        "bodyPart": [
+            "Lower Body",
+            "Calves"
+        ],
+        "equipment": "None",
+        "difficulty": "Easy",
+        "instructions": "1. Stand with your feet shoulder-width apart.\n2. Raise your heels off the ground as high as possible, then lower them back down."
+    },
+    {
+        "name": "Bulgarian Split Squat",
+        "description": "An exercise targeting the quads, hamstrings, and glutes.",
+        "bodyPart": [
+            "Lower Body",
+            "Quads",
+            "Hamstrings",
+            "Glutes"
+        ],
+        "equipment": "None",
+        "difficulty": "Hard",
+        "instructions": "1. Stand lunge-length in front of a bench.\n2. Place the top of your left foot on the bench behind you.\n3. Lower your hips to the ground until your right thigh is parallel to the ground.\n4. Return to the starting position and repeat on the other side."
+    },
+    {
+        "name": "Glute Bridge",
+        "description": "An exercise to strengthen the glutes and hamstrings.",
+        "bodyPart": [
+            "Lower Body",
+            "Glutes",
+            "Hamstrings"
+        ],
+        "equipment": "None",
+        "difficulty": "Easy",
+        "instructions": "1. Lie on your back with your knees bent and your feet flat on the floor.\n2. Lift your hips towards the ceiling, squeezing your glutes at the top.\n3. Lower your hips back to the starting position."
+    },
+    {
+        "name": "Step-Up",
+        "description": "An exercise to target the quads and glutes.",
+        "bodyPart": [
+            "Lower Body",
+            "Quads",
+            "Glutes"
+        ],
+        "equipment": "Step or Bench",
+        "difficulty": "Medium",
+        "instructions": "1. Stand in front of a step or bench.\n2. Step up onto the bench with one foot and drive through that heel to lift your body up.\n3. Step down and repeat with the other leg."
+    },
+    {
+        "name": "Hamstring Curl",
+        "description": "An isolation exercise for the hamstrings.",
+        "bodyPart": [
+            "Lower Body",
+            "Hamstrings"
+        ],
+        "equipment": "Hamstring Curl Machine",
+        "difficulty": "Medium",
+        "instructions": "1. Lie face down on the hamstring curl machine and place your legs under the pad.\n2. Curl your legs up towards your glutes as far as possible.\n3. Slowly lower your legs back to the starting position."
+    },
+    {
+        "name": "Goblet Squat",
+        "description": "A squat variation that targets the quads, hamstrings, and glutes.",
+        "bodyPart": [
+            "Lower Body",
+            "Quads",
+            "Hamstrings",
+            "Glutes"
+        ],
+        "equipment": "Dumbbell or Kettlebell",
+        "difficulty": "Medium",
+        "instructions": "1. Hold a dumbbell or kettlebell close to your chest.\n2. Perform a squat by lowering your hips back and down while keeping your chest up.\n3. Return to the starting position."
+    }
+]
