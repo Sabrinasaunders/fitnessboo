@@ -6,39 +6,46 @@ export const QUERY_USER = gql`
       _id
       username
       email
-      thoughts {
-        _id
-        thoughtText
-        createdAt
+      exercises {
+        exercise {
+          _id
+          name
+          description
+          bodyPart
+          equipment
+          difficulty
+          instructions
+        }
+        completed
       }
     }
   }
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
+export const QUERY_EXERCISES = gql`
+  query getExercises($bodyPart: String) {
+    exercises(bodyPart: $bodyPart) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
+      name
+      description
+      bodyPart
+      equipment
+      difficulty
+      instructions
     }
   }
 `;
 
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
+export const QUERY_SINGLE_EXERCISE = gql`
+  query getSingleExercise($exerciseId: ID!) {
+    exercise(exerciseId: $exerciseId) {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        commentAuthor
-        createdAt
-      }
+      name
+      description
+      bodyPart
+      equipment
+      difficulty
+      instructions
     }
   }
 `;
@@ -49,11 +56,17 @@ export const QUERY_ME = gql`
       _id
       username
       email
-      thoughts {
-        _id
-        thoughtText
-        thoughtAuthor
-        createdAt
+      exercises {
+        exercise {
+          _id
+          name
+          description
+          bodyPart
+          equipment
+          difficulty
+          instructions
+        }
+        completed
       }
     }
   }
