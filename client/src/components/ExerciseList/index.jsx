@@ -14,32 +14,31 @@ const ExerciseList = ({
             exercises.map((exercise) => (
               <div key={exercise._id} className="card mb-3">
                 <h4 className="card-header bg-primary text-light p-2 m-0">
-                  {showUsername ? (
+                  {showName ? (
                     <Link
                       className="text-light"
                       to={`/profiles/${exercises.exercisesId}`}
                     >
                       {exercises.exercisesId} <br />
                       <span style={{ fontSize: '1rem' }}>
-                        had this exercise on {exercise.createdAt}
+                        {exercise.name}
                       </span>
                     </Link>
                   ) : (
                     <>
-                      <span style={{ fontSize: '1rem' }}>
+                      {/* <span style={{ fontSize: '1rem' }}>
                         You had this exercise on {exercise.createdAt}
-                      </span>
+                      </span> */}
                     </>
                   )}
                 </h4>
                 <div className="card-body bg-light p-2">
-                  <p>{exercise.exerciseText}</p>
+                  <p>{exercise.description}</p>
                 </div>
                 <Link
                   className="btn btn-primary btn-block btn-squared"
                   to={`/exercises/${exercise._id}`}
                 >
-                  Join the discussion on this exercise.
                 </Link>
               </div>
             ))}
@@ -47,5 +46,5 @@ const ExerciseList = ({
       );
     };
     
-    export default exerciseList;
+    export default ExerciseList;
     
