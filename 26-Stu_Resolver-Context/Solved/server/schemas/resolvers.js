@@ -1,26 +1,27 @@
-const { User, Thought } = require('../models');
+// const { AuthenticationError } = require('apollo-server-express');  Do i need this???
+const { User, Thought, Exercise } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('thoughts');
+      return User.find().populate('exercises.exercise');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts');
+      return User.findOne({ username }).populate('exercises.exercise');
     },
-    thoughts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+    exercises: async (parent, { bodyPart }) => {
+      const params = bodyPart ? { bodyPart } : {};
+      return Exercise.find(params);
     },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    exercise: async (parent, { exerciseId }) => {
+      return Exercise.findOne({ _id: exerciseId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id }).populate('exercises.exercise');
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');;
     },
   },
 
@@ -40,77 +41,37 @@ const resolvers = {
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError;
       }
 
       const token = signToken(user);
 
       return { token, user };
     },
-    addThought: async (parent, { thoughtText }, context) => {
+    addExercise: async (parent, { exerciseId }, context) => {
       if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
-        });
+        const exercise = await Exercise.findById(exerciseId);
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
-        );
-
-        return thought;
-      }
-      throw AuthenticationError;
-      ('You need to be logged in!');
-    },
-    addComment: async (parent, { thoughtId, commentText }, context) => {
-      if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      throw AuthenticationError;
-    },
-    removeThought: async (parent, { thoughtId }, context) => {
-      if (context.user) {
-        const thought = await Thought.findOneAndDelete({
-          _id: thoughtId,
-          thoughtAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { thoughts: thought._id } }
-        );
-
-        return thought;
-      }
-      throw AuthenticationError;
-    },
-    removeComment: async (parent, { thoughtId, commentId }, context) => {
-      if (context.user) {
-        return Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          {
-            $pull: {
-              comments: {
-                _id: commentId,
-                commentAuthor: context.user.username,
-              },
-            },
-          },
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { exercises: { exercise, completed: false } } },
           { new: true }
         );
+
+        return User.findById(context.user._id).populate('exercises.exercise');
+      }
+      throw AuthenticationError('You need to be logged in!');
+
+    },
+    markExercise: async (parent, { exerciseId }, context) => {
+      if (context.user) {
+        await User.findOneAndUpdate(
+          { _id: context.user._id, 'exercises.exercise': exerciseId },
+          { $set: { 'exercises.$.completed': true} },
+          { new: true }
+        );
+
+        return User.findById(context.user._id).populate('exercises.exercise');
       }
       throw AuthenticationError;
     },
