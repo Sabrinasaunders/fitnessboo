@@ -65,3 +65,12 @@ export const MARK_EXERCISE = gql`
     }
   }
 `;
+
+export const DELETE_USER = gql`
+  mutation deleteUser {
+    deleteUser {
+      _id
+      username 
+    }
+  }
+`;

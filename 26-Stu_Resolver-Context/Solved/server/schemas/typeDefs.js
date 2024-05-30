@@ -40,6 +40,7 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addExercise(exerciseId: ID!): User
     markExercise(exerciseId: ID!): User
+    deleteUser: User
   }
 `;
 
