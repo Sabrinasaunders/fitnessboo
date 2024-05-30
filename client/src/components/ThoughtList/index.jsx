@@ -20,9 +20,9 @@ const ThoughtList = ({
               {showUsername ? (
                 <Link
                   className="text-light"
-                  to={`/profiles/${thought.thoughtAuthor}`}
+                  to={`/profiles/${exercises.exercisesId}`}
                 >
-                  {thought.thoughtAuthor} <br />
+                  {exercises.exercisesId} <br />
                   <span style={{ fontSize: '1rem' }}>
                     had this thought on {thought.createdAt}
                   </span>
