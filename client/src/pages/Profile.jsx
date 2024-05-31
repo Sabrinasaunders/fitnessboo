@@ -39,12 +39,26 @@ const Profile = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <ThoughtList
-            thoughts={user.thoughts}
-            title={`${user.username}'s thoughts...`}
-            showTitle={false}
-            showUsername={false}
-          />
+          <h3>Checkmarked Exercises</h3>
+          {user.exercises.length ? (
+            user.exercises.map(({ exercise, completed }) => (
+              <div key={exercise._id} className="card mb-3">
+                <h4 className="card-header bg-primary text-light p-2 m-0">
+                  {exercise.name}
+                </h4>
+                <div className="card-body bg-light p-2">
+                  <p><strong>Description:</strong> {exercise.description}</p>
+                  <p><strong>Body Part:</strong> {exercise.bodyPart.join(', ')}</p>
+                  <p><strong>Equipment:</strong> {exercise.equipment}</p>
+                  <p><strong>Difficulty:</strong> {exercise.difficulty}</p>
+                  <p><strong>Instructions:</strong> {exercise.instructions}</p>
+                  <p><strong>Completed:</strong> {completed ? "Yes" : "No"}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No exercises checkmarked yet.</p>
+          )}
         </div>
         {!userParam && (
           <div
