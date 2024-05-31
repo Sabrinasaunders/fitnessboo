@@ -1,7 +1,9 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { DELETE_USER, MARK_EXERCISE } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
@@ -11,6 +13,26 @@ const Profile = () => {
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
+
+  const [deleteUser] = useMutation(DELETE_USER, {
+    onCompleted: () => {
+      Auth.logout();
+      window.location.href = '/'; 
+    },
+    onError: (error) => {
+      console.error("Error deleting user:", error);
+    }
+  });
+
+  const [markExercise] = useMutation(MARK_EXERCISE, {
+    onCompleted: () => {
+      refetch(); // Refetch user data to update the UI
+    },
+    onError: (error) => {
+      console.error("Error marking exercise:", error);
+    }
+  });
+
 
   const user = data?.me || data?.user || {};
   // navigate to personal profile page if username is yours
@@ -30,6 +52,24 @@ const Profile = () => {
       </h4>
     );
   }
+
+  const handleDeleteAccount = async () => {
+    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      try {
+        await deleteUser();
+      } catch (error) {
+        console.error('Error deleting account:', error);
+      }
+    }
+  };
+
+  const handleMarkExercise = async (exerciseId) => {
+    try {
+      await markExercise({ variables: { exerciseId } });
+    } catch (error) {
+      console.error('Error marking exercise:', error);
+    }
+  };
 
   return (
     <div>
@@ -52,7 +92,26 @@ const Profile = () => {
                   <p><strong>Equipment:</strong> {exercise.equipment}</p>
                   <p><strong>Difficulty:</strong> {exercise.difficulty}</p>
                   <p><strong>Instructions:</strong> {exercise.instructions}</p>
-                  <p><strong>Completed:</strong> {completed ? "Yes" : "No"}</p>
+                  <div className="progress mb-3">
+                    <div
+                      className={`progress-bar ${completed ? 'bg-success' : 'bg-warning'}`}
+                      role="progressbar"
+                      style={{ width: `${completed ? 100 : 50}%` }}
+                      aria-valuenow={completed ? 100 : 50}
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      {completed ? 'Completed' : 'In Progress'}
+                    </div>
+                  </div>
+                  {!completed && (
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleMarkExercise(exercise._id)}
+                    >
+                      Mark as Completed
+                    </button>
+                  )}
                 </div>
               </div>
             ))
@@ -60,14 +119,14 @@ const Profile = () => {
             <p>No exercises checkmarked yet.</p>
           )}
         </div>
-        {!userParam && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-            style={{ border: '1px dotted #1a1a1a' }}
-          >
-            <ThoughtForm />
-          </div>
-        )}
+        
+
+        <div className="col-12 col-md-10 mb-3">
+          <button className="btn btn-danger" onClick={handleDeleteAccount}>
+            Delete My Account
+          </button>
+        </div>
+
       </div>
     </div>
   );
