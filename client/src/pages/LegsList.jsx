@@ -13,6 +13,7 @@ const LegsList = () => {
         <button className="ex-btn">button6</button>
         <button className="ex-btn">button7</button>
         <button className="ex-btn">button8</button>
+        <button className="ex-btn">button8</button>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const PushList = () => {
-  const exercises = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  const exercises = ["1", "2", "3", "4", "5", "6", "7", "8", '9'];
 
   return (
     <div>
