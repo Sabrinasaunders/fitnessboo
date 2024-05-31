@@ -9,7 +9,7 @@ const ExerciseList = ({
     }
     return (
         <div>
-          {showName && <h3>{title}</h3>}
+          {showName && <h3>{name}</h3>}
           {exercises &&
             exercises.map((exercise) => (
               <div key={exercise._id} className="card mb-3">

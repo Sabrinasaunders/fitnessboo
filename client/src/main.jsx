@@ -5,9 +5,12 @@ import App from './App.jsx';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleExercise';
+import SingleExercise from './pages/SingleExercise';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
+import PushList from './pages/PushList';
+import PullList from './pages/PullList';
+import LegsList from './pages/LegsList';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +36,15 @@ const router = createBrowserRouter([
       }, {
         path: '/thoughts/:thoughtId',
         element: <SingleExercise />
+      }, {
+        path: '/push',
+        element: <PushList />
+      }, {
+        path: '/pull',
+        element: <PullList />
+      }, {
+        path: '/legs',
+        element: <LegsList />
       }
     ]
   },
