@@ -5,8 +5,8 @@ import { useQuery } from '@apollo/client';
 //TODO: Changed the imports below, delete them when ready
 // import CommentList from '../components/CommentList';
 // import CommentForm from '../components/CommentForm';
-import LowerBody from '../components/LowerBody';
-import UpperBody from '../components/UpperBody';
+// import LowerBody from '../components/LowerBody';
+// import UpperBody from '../components/UpperBody';
 
 import { QUERY_SINGLE_EXERCISE } from '../utils/queries';
 
@@ -46,12 +46,12 @@ const SingleExercise = () => {
         </blockquote>
       </div>
 
-      <div className="my-5">
+      {/* <div className="my-5">
         <CommentList comments={exercise.comments} />
       </div>
       <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
         <CommentForm exerciseId={exercise._id} />
-      </div>
+      </div> */}
     </div>
   );
 };
