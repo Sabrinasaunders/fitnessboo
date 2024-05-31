@@ -54,7 +54,7 @@ const resolvers = {
 
         await User.findByIdAndUpdate(
           context.user._id,
-          { $push: { exercises: { exercise, completed: false } } },
+          { $push: { exercises: { exercise: exerciseId, completed: false } } },
           { new: true }
         );
 
