@@ -50,8 +50,13 @@ const resolvers = {
     },
     addExercise: async (parent, { exerciseId }, context) => {
       if (context.user) {
-        const exercise = await Exercise.findById(exerciseId);
+        const user = await User.findById(context.user._id);
+        const existingExercise = user.exercises.find((ex) => ex.exercise.toString() === exerciseId);
 
+        if (existingExercise) {
+          throw new Error('Exercise already added to your Profile!')
+        }
+        
         await User.findByIdAndUpdate(
           context.user._id,
           { $push: { exercises: { exercise: exerciseId, completed: false } } },
@@ -83,6 +88,18 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    removeExercise: async (parent, { exerciseId }, context) => {
+      if (context.user) {
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { exercises: { exercise: exerciseId } } },
+          { new: true }
+        );
+        return User.findById(context.user._id).populate('exercises.exercise');
+      }
+      throw new AuthenticationError('You need to be logged in!')
+    }
   },
 };
 

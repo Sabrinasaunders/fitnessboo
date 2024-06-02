@@ -1,6 +1,6 @@
 // Import the `useParams()` hook
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 //TODO: Changed the imports below, delete them when ready
 // import CommentList from '../components/CommentList';
@@ -8,28 +8,63 @@ import { useQuery } from '@apollo/client';
 // import LowerBody from '../components/LowerBody';
 // import UpperBody from '../components/UpperBody';
 
-import { QUERY_SINGLE_EXERCISE } from '../utils/queries';
+import { QUERY_SINGLE_EXERCISE, QUERY_ME } from '../utils/queries';
+import { ADD_EXERCISE } from '../utils/mutations';
 
 const SingleExercise = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const { exerciseId } = useParams();
 
-  const { loading, data } = useQuery(QUERY_SINGLE_EXERCISE, {
+  const { loading, data, refetch } = useQuery(QUERY_SINGLE_EXERCISE, {
     // pass URL parameter
     variables: { exerciseId: exerciseId },
   });
 
+  const { data: userData } = useQuery(QUERY_ME);
+
+  const [addExercise] = useMutation(ADD_EXERCISE, {
+    onCompleted: () => {
+      console.log('Exercise added to profile');
+    },
+    onError: (error) => {
+      console.error('Error adding exercise:', error);
+    }
+  });
+
   const exercise = data?.exercise || {};
+  const user = userData?.me || {};
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  const existingExercise = user.exercises.find(
+    (ex) => ex.exercise._id === exerciseId
+  );
+
+  const handleAddExercise = async () => {
+    const existingExercise = user.exercises.find(
+      (ex) => ex.exercise._id === exerciseId
+    );
+
+    if (existingExercise) {
+      console.log('Exercise already added to your profile');
+      return;
+    }
+
+    try {
+      await addExercise({ variables: { exerciseId } });
+    } catch (error) {
+      console.error('Error adding exercise:', error);
+    }
+  };
+
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-0">
-        {exercise.exerciseAuthor} <br />
+        {exercise.name} <br />
         <span style={{ fontSize: '1rem' }}>
-          Did this exercise: {exercise.createdAt}
+          Add this Exercise: {exercise.createdAt}
         </span>
       </h3>
       <div className="bg-light py-4">
@@ -41,17 +76,24 @@ const SingleExercise = () => {
             border: '2px dotted #1a1a1a',
             lineHeight: '1.5',
           }}
+          
         >
-          {exercise.exerciseText}
+          <p><strong>Description:</strong> {exercise.description}</p>
+          <p><strong>Body Part:</strong> {exercise.bodyPart.join(', ')}</p>
+          <p><strong>Equipment:</strong> {exercise.equipment}</p>
+          <p><strong>Difficulty:</strong> {exercise.difficulty}</p>
+          <p><strong>Instructions:</strong> {exercise.instructions}</p>
         </blockquote>
       </div>
-
-      {/* <div className="my-5">
-        <CommentList comments={exercise.comments} />
-      </div>
-      <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        <CommentForm exerciseId={exercise._id} />
-      </div> */}
+      {existingExercise ? (
+        <div className="alert alert-warning" role="alert">
+          This exercise is already in your profile.
+        </div>
+      ) : (
+        <button className="btn btn-primary" onClick={handleAddExercise}>
+          Add to My Exercises
+        </button>
+      )}
     </div>
   );
 };
