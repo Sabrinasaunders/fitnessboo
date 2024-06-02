@@ -3,14 +3,14 @@ import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { DELETE_USER, MARK_EXERCISE } from '../utils/mutations';
+import { DELETE_USER, MARK_EXERCISE, REMOVE_EXERCISE } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
 const Profile = () => {
   const { username: userParam } = useParams();
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+  const { loading, data, refetch } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
@@ -30,6 +30,15 @@ const Profile = () => {
     },
     onError: (error) => {
       console.error("Error marking exercise:", error);
+    }
+  });
+
+  const [removeExercise] = useMutation(REMOVE_EXERCISE, {
+    onCompleted: () => {
+      refetch(); // Refetch user data to update the UI
+    },
+    onError: (error) => {
+      console.error("Error removing exercise:", error);
     }
   });
 
@@ -71,6 +80,18 @@ const Profile = () => {
     }
   };
 
+  const handleRemoveExercise = async (exerciseId) => {
+    try {
+      await removeExercise({ variables: { exerciseId } });
+    } catch (error) {
+      console.error('Error removing exercise:', error);
+    }
+  };
+
+  const totalExercises = user.exercises.length;
+  const completedExercises = user.exercises.filter(ex => ex.completed).length;
+  const overallProgress = totalExercises > 0 ? (completedExercises / totalExercises) * 100 : 0;
+
   return (
     <div>
       <div className="flex-row justify-center mb-3">
@@ -79,7 +100,20 @@ const Profile = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <h3>Checkmarked Exercises</h3>
+          <h3>Overall Progress</h3>
+          <div className="progress mb-3">
+            <div
+              className="progress-bar bg-success"
+              role="progressbar"
+              style={{ width: `${overallProgress}%` }}
+              aria-valuenow={overallProgress}
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {overallProgress.toFixed(2)}% Completed
+            </div>
+          </div>
+          <h3>Your Exercises</h3>
           {user.exercises.length ? (
             user.exercises.map(({ exercise, completed }) => (
               <div key={exercise._id} className="card mb-3">
@@ -112,6 +146,12 @@ const Profile = () => {
                       Mark as Completed
                     </button>
                   )}
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleRemoveExercise(exercise._id)}
+                  >
+                    Remove Exercise
+                  </button>
                 </div>
               </div>
             ))

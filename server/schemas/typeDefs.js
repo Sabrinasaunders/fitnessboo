@@ -41,6 +41,7 @@ const typeDefs = `
     addExercise(exerciseId: ID!): User
     markExercise(exerciseId: ID!): User
     deleteUser: User
+    removeExercise(exerciseId: ID!): User
   }
 `;
 

@@ -74,3 +74,24 @@ export const DELETE_USER = gql`
     }
   }
 `;
+
+export const REMOVE_EXERCISE = gql`
+  mutation removeExercise($exerciseId: ID!) {
+    removeExercise(exerciseId: $exerciseId) {
+      _id
+      username
+      exercises {
+        exercise {
+          _id
+          name
+          description
+          bodyPart
+          equipment
+          difficulty
+          instructions
+        }
+        completed
+      }
+    }
+  }
+`;
