@@ -1,5 +1,5 @@
 // Import the `useParams()` hook
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 //TODO: Changed the imports below, delete them when ready
@@ -10,10 +10,16 @@ import { useQuery, useMutation } from '@apollo/client';
 
 import { QUERY_SINGLE_EXERCISE, QUERY_ME } from '../utils/queries';
 import { ADD_EXERCISE } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const SingleExercise = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const { exerciseId } = useParams();
+  const navigate = useNavigate();
+
+  if (!Auth.loggedIn()) {
+    navigate('/login');
+  }
 
   const { loading, data, refetch } = useQuery(QUERY_SINGLE_EXERCISE, {
     // pass URL parameter
